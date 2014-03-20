@@ -1,6 +1,6 @@
-Aihe: Avaruusteemainen laivanupotuspeli. Kaksi pelaajaa ensin asettavat laivastonsa pelilaudalle, ja sitten yrittävät vuorollaan "upottaa" toisen laivat. Mahdollisesti lisäsääntöjä piristämään peliä.
+Aihe: Avaruusteemainen laivanupotuspeli. Pelaaja ja AI-vastustaja ensin asettavat laivastonsa pelilaudalle, ja sitten yrittävät vuorollaan "upottaa" toisen laivat. Mahdollisesti lisäsääntöjä piristämään peliä.
 
-Käyttäjät: pelaajat, 1 vastaan 1 samalla tietokoneella
+Käyttäjät: pelaaja tietokoneella
 
 Toiminnot: 
 
