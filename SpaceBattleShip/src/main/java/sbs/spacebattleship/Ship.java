@@ -27,10 +27,24 @@ public class Ship {
         this.hitsTaken = 0;
         this. isSunk = false;
     }
-
-    public int getSize() {
+ 
+   public int getSize() {
         return size;
     }
+
+    public int getR() {
+        return r;
+    }
+
+    public int getC() {
+        return c;
+    }
+
+    public boolean isIsHorizontal() {
+        return isHorizontal;
+    }
+   
+   
     
     
 

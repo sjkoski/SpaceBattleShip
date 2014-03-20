@@ -8,7 +8,7 @@ public class App
 {
     public static void main( String[] args )
     {
-        Game game = new Game(10, 7);
+        Game game = new Game(10, 4);
         game.drawBoard();
 
     }
