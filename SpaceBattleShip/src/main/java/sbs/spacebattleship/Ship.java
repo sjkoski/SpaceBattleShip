@@ -4,12 +4,10 @@
  */
 package sbs.spacebattleship;
 
-import java.util.Random;
-
 public class Ship {
    
-    private int x;
-    private int y;
+    private int r;
+    private int c;
     private boolean isHorizontal;
     private int size;
     private int hitsTaken;
@@ -21,12 +19,19 @@ public class Ship {
         hitsTaken = 0;
     }
     
-    public void place(Board board) {
-        Random random = new Random();
-        x = random.nextInt(board.getRow());
-        y = random.nextInt(board.getColumn());
-        int ishoriz = random.nextInt(1);
-        isHorizontal = (ishoriz == 0);
-        
+    public Ship(int r, int c, int size, boolean isHorizontal) {
+        this.r = r;
+        this.c = c;
+        this.size = size;
+        this.isHorizontal = isHorizontal;
+        this.hitsTaken = 0;
+        this. isSunk = false;
     }
+
+    public int getSize() {
+        return size;
+    }
+    
+    
+
 } 
