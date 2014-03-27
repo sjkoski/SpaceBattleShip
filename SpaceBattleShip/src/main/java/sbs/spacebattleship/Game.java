@@ -4,30 +4,44 @@ import java.util.ArrayList;
 
 public class Game {
 
-    private Board board;
-    private Player player1;
-    private boolean isWinner;
+    private Board humanboard;
+    private Board aiboard;
+    private Player humanplayer;
+    private Player aiplayer;
+    private boolean gameOver;
+    private String winner;
 
     public Game(int dimension, int maxshipsize) {
-        board = new Board(dimension, dimension, maxshipsize);
-        player1 = new Human();
-        isWinner = false;
+        humanboard = new HumanBoard(dimension, dimension, maxshipsize);
+        aiboard = new AIBoard(dimension, dimension, maxshipsize);
+        humanplayer = new Human();
+        aiplayer = new AI();
+        gameOver = false;
+        winner = "";
 
     }
 
     public void play() {
-        while (!isWinner) {
-            player1.shoot(board);
-            drawBoard(false);
-            System.out.println("You have sunk " + board.checkStatus() + " ships");
-            if (board.checkStatus() == board.getShipAmount()) {
-                isWinner = true;
+        while (!gameOver) {
+            humanplayer.shoot(aiboard);
+            drawBoard(aiboard, true);
+            System.out.println("You have sunk " + aiboard.howManySunkenShips() + " ships");
+            if (aiboard.howManySunkenShips() == aiboard.getShipAmount()) {
+                gameOver = true;
+                winner = "You";
+            }
+            aiplayer.shoot(humanboard);
+            drawBoard(humanboard, false);
+            System.out.println("The AI has sunk " + humanboard.howManySunkenShips() + " ships");
+            if (humanboard.howManySunkenShips() == humanboard.getShipAmount()) {
+                gameOver = true;
+                winner = "AI";
             }
         }
-        System.out.println("You have won the game!");
+        System.out.println("The game has ended! The winner is " + winner);
     }
 
-    public void drawBoard(boolean ishidden) {
+    public void drawBoard(Board board, boolean ishidden) {
         board.draw(ishidden);
     }
 }

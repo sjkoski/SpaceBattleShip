@@ -11,7 +11,7 @@ public class BoardTest {
 
     public BoardTest() {
     }
-    private Board board;
+    private AIBoard board;
 
     @BeforeClass
     public static void setUpClass() {
@@ -23,7 +23,7 @@ public class BoardTest {
 
     @Before
     public void setUp() {
-        board = new Board(10, 10, 0);
+        board = new AIBoard(10, 10, 0);
     }
 
     @After
