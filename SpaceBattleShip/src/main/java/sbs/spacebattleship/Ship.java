@@ -5,30 +5,60 @@
 package sbs.spacebattleship;
 
 public class Ship {
-   
+
     private int r;
     private int c;
     private boolean isHorizontal;
     private int size;
-    private int hitsTaken;
     private boolean isSunk;
-    
+    private Board board;
+
     public Ship(int size) {
         this.size = size;
+        this.board = board;
         isSunk = false;
-        hitsTaken = 0;
     }
-    
-    public Ship(int r, int c, int size, boolean isHorizontal) {
+
+    public Ship(int r, int c, int size, boolean isHorizontal, Board board) {
         this.r = r;
         this.c = c;
         this.size = size;
         this.isHorizontal = isHorizontal;
-        this.hitsTaken = 0;
-        this. isSunk = false;
+        this.isSunk = false;
+        this.board = board;
     }
- 
-   public int getSize() {
+
+    public boolean checkStatus() {
+        return isSunk;
+    }
+
+    public int getHits() {
+        //returns the number of hits on the ship
+        int hitsTaken = 0;
+        if (isHorizontal) {
+            for (int i = c; i < (size + c); i++) {
+                if (board.getCell(r, i) == 2) {
+                    hitsTaken++;
+                }
+            }
+        } else if (!isHorizontal) {
+            for (int i = r; i < (size + r); i++) {
+                if (board.getCell(r, c) == 2) {
+                    hitsTaken++;
+                }
+            }
+        }
+        return hitsTaken;
+    }
+
+    public boolean isSunk() {
+        if (getHits() == size) {
+            isSunk = true;
+        }
+        return isSunk;
+    }
+
+    public int getSize() {
         return size;
     }
 
@@ -40,12 +70,7 @@ public class Ship {
         return c;
     }
 
-    public boolean isIsHorizontal() {
+    public boolean isHorizontal() {
         return isHorizontal;
     }
-   
-   
-    
-    
-
-} 
+}

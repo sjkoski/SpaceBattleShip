@@ -1,7 +1,6 @@
 package sbs.spacebattleship;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Board {
@@ -52,20 +51,41 @@ public class Board {
         if (r < 0 || c < 0 || (!isHorizontal && r + size > row) || (isHorizontal && c + size > column)) {
             return place(size);
         }
-        //set each cell on the board to the value "1" to signify there's a ship
+        //set each of ship's cells on the board to the value "1" to signify there's a ship
+        //if a space is already occupied by another ship, redo this method
         if (isHorizontal) {
             for (int i = c; i < (size + c); i++) {
-                setCell(r, i, 1);
+                if (getCell(r, i) == 1) {
+                    return place(size);
+                }
             }
-        }
-        if (!isHorizontal) {
+            for (int j = c; j < size + c; j++) {
+                setCell(r, j, 1);
+            }
+        } else if (!isHorizontal) {
             for (int i = r; i < (size + r); i++) {
-                setCell(i, r, 1);
+                if (getCell(r, c) == 1) {
+                    return place(size);
+                }
+            }
+            for (int j = r; j < (size + r); j++) {
+                setCell(j, c, 1);
             }
         }
-        System.out.println("Ship of size " + size + " placed in (" + r + "," + c + "). It's horizontal value is " + isHorizontal);
-        return new Ship(r, c, size, isHorizontal);
-
+        System.out.println(
+                "Ship of size " + size + " placed in (" + r + "," + c + "). It's horizontal value is " + isHorizontal);
+        return new Ship(r, c, size, isHorizontal, this);
+    }
+    
+    public int checkStatus() {
+        //counts the number of sunk ships
+        int sunkShips = 0;
+        for (Ship ship : ships) {
+            if (ship.isSunk()) {
+                sunkShips++;
+            }
+        }
+        return sunkShips;
     }
 
     public void setCell(int r, int c, int v) {
@@ -95,12 +115,14 @@ public class Board {
     public int getShipAmount() {
         return ships.size();
     }
+    
 
-    public void draw() {
+    public void draw(boolean ishidden) {
         //Draw the current board. "-" means an empty cell, "S" an intact ship segment, "X" a hit ship segment and "O" a missed shot
+        // if variable ishidden is true, ship locations are not shown
         for (int a = 0; a < row; a++) {
             for (int b = 0; b < column; b++) {
-                if (board[a][b] == 1) {
+                if (board[a][b] == 1 && !ishidden) {
                     System.out.print(" S");
                 } else if (board[a][b] == 2) {
                     System.out.print(" X");
