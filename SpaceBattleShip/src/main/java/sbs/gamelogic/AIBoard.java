@@ -42,7 +42,7 @@ public class AIBoard extends Board {
             }
         } else if (!isHorizontal) {
             for (int i = r; i < (size + r); i++) {
-                if (getCell(r, c) == 1) {
+                if (getCell(i, c) == 1) {
                     return place(size);
                 }
             }

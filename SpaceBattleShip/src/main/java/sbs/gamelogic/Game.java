@@ -102,6 +102,7 @@ public class Game {
     public void newgame() {
         aiboard.initBoard(maxshipsize);
         humanboard.initBoard(maxshipsize);
+        humanboard.placeShips(maxshipsize);
         
     }
 

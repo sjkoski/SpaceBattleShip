@@ -46,7 +46,7 @@ public class HumanBoard extends Board {
             }
         } else if (!isHorizontal) {
             for (int i = r; i < (size + r); i++) {
-                if (getCell(r, c) == 1) {
+                if (getCell(i, c) == 1) {
                     return "Another ship occupying this space, please redo";
                 }
             }
