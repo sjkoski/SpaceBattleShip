@@ -1,5 +1,5 @@
 
-package sbs.spacebattleship;
+package sbs.gamelogic;
 
 public class Ship {
 
@@ -10,12 +10,6 @@ public class Ship {
     private boolean isSunk;
     private Board board;
 
-    public Ship(int size) {
-        this.size = size;
-        this.board = board;
-        isSunk = false;
-    }
-
     public Ship(int r, int c, int size, boolean isHorizontal, Board board) {
         this.r = r;
         this.c = c;
@@ -23,10 +17,6 @@ public class Ship {
         this.isHorizontal = isHorizontal;
         this.isSunk = false;
         this.board = board;
-    }
-
-    public boolean checkStatus() {
-        return isSunk;
     }
 
     public int getHits() {

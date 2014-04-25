@@ -1,13 +1,13 @@
-package sbs.spacebattleship;
+package sbs.gamelogic;
 
 import java.util.ArrayList;
-
 
 public abstract class Board {
 
     protected int[][] board;
     protected ArrayList<Ship> ships;
     protected int row, column;
+    protected boolean acceptClick;
 
     public Board(int r, int c, int maxshipsize) {
         if (r > 0) {
@@ -19,7 +19,8 @@ public abstract class Board {
         //make a board of x*y dimensions and place ships on it
         board = new int[row][column];
         ships = new ArrayList<>();
-        
+        acceptClick = false;
+
     }
 
     public void initBoard(int maxshipsize) {
@@ -28,9 +29,6 @@ public abstract class Board {
             for (int c = 0; c < column; c++) {
                 board[r][c] = 0;
             }
-        }
-        if (maxshipsize > 0 && maxshipsize <= row && maxshipsize <= column) {
-            placeShips(maxshipsize);
         }
     }
 
@@ -57,7 +55,6 @@ public abstract class Board {
     }
 
     public int howManySunkenShips() {
-        //counts the number of sunk ships
         int sunkShips = 0;
         for (Ship ship : ships) {
             if (ship.isSunk()) {
@@ -93,5 +90,17 @@ public abstract class Board {
 
     public int getShipAmount() {
         return ships.size();
+    }
+
+    public boolean areClicksAccepted() {
+        return acceptClick;
+    }
+    
+    public void setAcceptClick(boolean b) {
+        acceptClick = b;
+    }
+
+    public String place(int row, int column, boolean leftMouseButton) {
+        throw new UnsupportedOperationException("Not yet implemented");
     }
 }

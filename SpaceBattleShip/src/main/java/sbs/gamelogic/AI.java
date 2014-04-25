@@ -1,8 +1,8 @@
-package sbs.spacebattleship;
+package sbs.gamelogic;
 
 import java.util.Random;
 
-public class AI implements Player {
+public class AI {
 
     private Random random;
 
@@ -10,26 +10,24 @@ public class AI implements Player {
         random = new Random();
     }
 
-    @Override
-    public boolean shoot(Board board) {
+    public String shoot(Board board) {
         boolean valid = false;
         int r = 0;
         int c = 0;
         while (!valid) {
             r = random.nextInt(10);
             c = random.nextInt(10);
+            //as long as the target cell hasn't been shot at before, it's valid.
             if (board.getCell(r, c) < 2) {
                 valid = true;
             }
         }
         if (board.getCell(r, c) == 1) {
-            System.out.println("Hit!");
             board.setCell(r, c, 2);
-            return true;
+            return ("The enemy fires turbolasers at (" + r + " , " + c + ")! Hit!");
         } else {
-            System.out.println("Miss!");
             board.setCell(r, c, 3);
-            return false;
+            return ("The enemy fires turbolasers at (" + r + " , " + c + ")! Miss!");
         }
     }
 }
