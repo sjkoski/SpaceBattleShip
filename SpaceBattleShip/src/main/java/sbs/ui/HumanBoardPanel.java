@@ -6,6 +6,13 @@ import javax.swing.JPanel;
 import sbs.gamelogic.Board;
 import sbs.gamelogic.Updatable;
 
+/**
+ * Graphic implementation of the human player's board. Implements the Updatable
+ * interface so that the game itself can call it
+ * Technique totally stolen from the OhJa course Matopeli exercise.
+ *
+ * @author Sampo
+ */
 public class HumanBoardPanel extends JPanel implements Updatable {
 
     private Board board;
@@ -15,6 +22,11 @@ public class HumanBoardPanel extends JPanel implements Updatable {
     }
 
     @Override
+    /**
+     * Draws the human player's board grid Black background Green rectangles
+     * form the grid light gray filled rectangles for ships red dots for hits
+     * and white dots for misses
+     */
     public void paintComponent(Graphics g) {
         setSize(301, 301);
         setBackground(Color.BLACK);
@@ -33,7 +45,7 @@ public class HumanBoardPanel extends JPanel implements Updatable {
         g.setColor(Color.LIGHT_GRAY);
         for (int a = 0; a < board.getRow(); a++) {
             for (int b = 0; b < board.getColumn(); b++) {
-                if (board.getCell(a, b) == 1 || board.getCell(a, b) == 2 ){
+                if (board.getCell(a, b) != 0 && board.getCell(a, b) != 10) {
                     g.fillRect((b * 30), (a * 30), 30, 30);
                 }
 
@@ -43,7 +55,7 @@ public class HumanBoardPanel extends JPanel implements Updatable {
         g.setColor(Color.RED);
         for (int a = 0; a < board.getRow(); a++) {
             for (int b = 0; b < board.getColumn(); b++) {
-                if (board.getCell(a, b) == 2) {
+                if (board.getCell(a, b) > 10) {
                     g.fillOval(b * 30, a * 30, 30, 30);
                 }
 
@@ -52,7 +64,7 @@ public class HumanBoardPanel extends JPanel implements Updatable {
         g.setColor(Color.WHITE);
         for (int a = 0; a < board.getRow(); a++) {
             for (int b = 0; b < board.getColumn(); b++) {
-                if (board.getCell(a, b) == 3) {
+                if (board.getCell(a, b) == 10) {
                     g.fillOval(b * 30, a * 30, 30, 30);
                 }
 
@@ -64,5 +76,4 @@ public class HumanBoardPanel extends JPanel implements Updatable {
     public void update() {
         repaint();
     }
-
 }

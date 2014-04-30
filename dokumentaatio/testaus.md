@@ -1,0 +1,1 @@
+Käsintestaus oli erittäin ekstensiivistä läpi ohjelman kaikkien iteraatioiden, ehkä osin kompensoiden heikohkoa automaatiotestaustani. Käyttöliittymällä on mahdoton antaa virhesyötteitä joten testauksen mielekkyys jäi jotenkin vähän hataraksi. Ship-luokkaa ei oikein voi automaattisesti testata, ja monien muidenkin luokkien kanssa oli hankalaa keksiä mielekkäitä yksikkötestejä.

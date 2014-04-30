@@ -1,30 +1,56 @@
 package sbs.gamelogic;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
+/**
+  * Abstract class for the game boards. Human and AI versions extend this in
+ * different ways. Has methods that are necessary for keeping track and
+ * manipulating the game state.
+ *
+ *  * @author Sampo
+ */
 public abstract class Board {
 
+    /**
+     * the actual board is an int[][] array that represents the rows and
+     * columns. The cell values represent the following: 0 = empty cell 10 =
+     * empty cell that has been shot 2-9 = segment of a ship with that size, e.g
+     * value of 3 means a section of a 3-length ship is in this cell 12-19 =
+     * segment of a ship with size 2-9 as above, that has been shot at.
+     */
     protected int[][] board;
-    protected ArrayList<Ship> ships;
+    /**
+     * A hashmap of the ships on the board. The key is the length of a ship,
+     * since there's only one ship of each size.
+     */
+    protected HashMap<Integer, Ship> ships;
     protected int row, column;
+    /**
+     * Whether mouse clicks on the GUI on this board register or not,
+     * essentially equivalent to whose turn it is in the game.
+     */
     protected boolean acceptClick;
 
-    public Board(int r, int c, int maxshipsize) {
-        if (r > 0) {
-            this.row = r;
+    public Board(int dimension, int maxshipsize) {
+        if (dimension > 0) {
+            this.row = dimension;
+            this.column = dimension;
+        } else {
+            this.row = 10;
+            this.column = 10;
         }
-        if (c > 0) {
-            this.column = c;
-        }
-        //make a board of x*y dimensions and place ships on it
         board = new int[row][column];
-        ships = new ArrayList<>();
+        ships = new HashMap<>();
         acceptClick = false;
 
     }
 
-    public void initBoard(int maxshipsize) {
-        //set 0 to every cell as initial value
+    /**
+     * Removes all ships from the board and sets the value 0 to all cells Used
+     * every time a new game begins.
+     */
+    public void initBoard() {
+        getShips().clear();
         for (int r = 0; r < row; r++) {
             for (int c = 0; c < column; c++) {
                 board[r][c] = 0;
@@ -32,36 +58,20 @@ public abstract class Board {
         }
     }
 
-    public void placeShips(int maxshipsize) {
-    }
-
-    public void draw(boolean ishidden) {
-        //Draw the current board. "-" means an empty cell, "S" an intact ship segment, "X" a hit ship segment and "O" a missed shot
-        // if variable ishidden is true, ship locations are not shown
-        for (int a = 0; a < row; a++) {
-            for (int b = 0; b < column; b++) {
-                if (board[a][b] == 1 && !ishidden) {
-                    System.out.print(" S");
-                } else if (board[a][b] == 2) {
-                    System.out.print(" X");
-                } else if (board[a][b] == 3) {
-                    System.out.print(" O");
-                } else {
-                    System.out.print(" -");
-                }
-            }
-            System.out.println();
-        }
-    }
-
+    /**
+     *
+     * @return returns the number of destroyed ships. Used for checking whether
+     * the game is over.
+     */
     public int howManySunkenShips() {
         int sunkShips = 0;
-        for (Ship ship : ships) {
+        for (Ship ship : ships.values()) {
             if (ship.isSunk()) {
                 sunkShips++;
             }
         }
         return sunkShips;
+
     }
 
     public void setCell(int r, int c, int v) {
@@ -88,19 +98,15 @@ public abstract class Board {
         this.column = column;
     }
 
-    public int getShipAmount() {
-        return ships.size();
+    public HashMap<Integer, Ship> getShips() {
+        return ships;
     }
 
     public boolean areClicksAccepted() {
         return acceptClick;
     }
-    
+
     public void setAcceptClick(boolean b) {
         acceptClick = b;
-    }
-
-    public String place(int row, int column, boolean leftMouseButton) {
-        throw new UnsupportedOperationException("Not yet implemented");
     }
 }
