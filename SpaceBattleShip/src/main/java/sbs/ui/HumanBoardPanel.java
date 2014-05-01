@@ -28,7 +28,7 @@ public class HumanBoardPanel extends JPanel implements Updatable {
      * and white dots for misses
      */
     public void paintComponent(Graphics g) {
-        setSize(301, 301);
+        setSize(300, 300);
         setBackground(Color.BLACK);
         super.paintComponent(g);
         g.setColor(Color.GREEN);

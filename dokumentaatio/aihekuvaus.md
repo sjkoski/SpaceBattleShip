@@ -4,9 +4,9 @@ Käyttäjät: pelaaja tietokoneella
 
 Toiminnot: 
 
-* laivojen asettaminen laudalle
+* laivojen asettaminen omalle laudalle
 * ihmispelaajan pelivuoron pelaaminen - ampuminen vastustajan laudalle
-* uuden pelin aloitus
+* uuden pelin aloitus - New Game nappi
 
 
 Ohjelman rakenne

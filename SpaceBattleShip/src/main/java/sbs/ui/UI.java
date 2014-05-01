@@ -65,6 +65,9 @@ public class UI implements Runnable {
         humanBoardPanel.addMouseListener(new HumanMouseListener(this, game));
         aiBoardPanel = new AIBoardPanel(game.getAIBoard());
         aiBoardPanel.addMouseListener(new AIMouseListener(this, game));
+        Border lineBorder = BorderFactory.createLineBorder(Color.GREEN);
+        aiBoardPanel.setBorder(lineBorder);
+        humanBoardPanel.setBorder(lineBorder);
         boards.add(humanBoardPanel);
         boards.add(aiBoardPanel);
 
@@ -85,8 +88,7 @@ public class UI implements Runnable {
 
         JScrollPane scroll = new JScrollPane(log);
         scroll.setBackground(Color.BLACK);
-        scroll.setPreferredSize(new Dimension(400, 100));
-        Border lineBorder = BorderFactory.createLineBorder(Color.GREEN);
+        scroll.setPreferredSize(new Dimension(400, 100));        
         Border logBorder = BorderFactory.createTitledBorder(lineBorder, "Battle Log", TitledBorder.RIGHT, TitledBorder.TOP, uifont, Color.green);
         scroll.setBorder(logBorder);
 

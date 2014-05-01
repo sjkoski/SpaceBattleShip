@@ -27,7 +27,7 @@ public class AIBoardPanel extends JPanel {
      */
     @Override
     public void paintComponent(Graphics g) {
-        setSize(301, 301);
+        setSize(300, 300);
         setBackground(Color.BLACK);
         super.paintComponent(g);
         g.setColor(Color.GREEN);
